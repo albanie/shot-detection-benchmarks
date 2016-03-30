@@ -14,29 +14,33 @@ The gameshow clip (an episode of UK Deal Or No Deal) is filmed in a reasonably w
 
 ##Results 
 
-For each dataset, the tools are first evaluated with their suggested defaults, then with parameters found through hand tuning. This hand tuning is done with the intention of maximizing the area under the *precision-recall* curve, typically by reducing the detection thresholds (see notebooks for chosen parameters). *NOTE: Depending on your application, you might prefer to keep a high precision at the expense of lower recall, in which case the default settings for each tool are reasonable.* 
+For each dataset, the tools are first evaluated with their suggested defaults, then with parameters found through hand tuning. This tuning is done with the intention of maximizing the area under the *precision-recall* curve, typically by reducing the detection thresholds (see notebooks for chosen parameters). 
+
+*NOTE: Depending on your application, you might prefer to keep a high precision at the expense of lower recall, in which case the default settings for each tool are reasonable.* 
 
 ###TV Gameshow
 
 ![gameshow results](figures/gameshow.png) ![gameshow results - tuned ](figures/gameshow-tuned.png) 
 
-On the TV gameshow clip (a UK Deal Or No Deal episode), all shot detectors achieve almost perfect precision and recall with their default settings (the ffprobe and pyscenedetect curves lie beneath the shotdetect curve).  The only error they make is caused by some jank in the original footage (visible around 1:02 seconds on the youtube video). There wasn't much point in changing the thresholds from these defaults. 
+On the TV gameshow clip (a UK Deal Or No Deal episode), all shot detectors achieve almost perfect precision and recall with their default settings (the ffprobe and pyscenedetect curves lie beneath the shotdetect curve).  The only error they make is caused by some jank in the original footage (visible around 1:02 seconds on the youtube video). The default thresholds were left unchanged. 
 
 ###Sports
 
 ![sports results](figures/football.png) ![sports results - tuned ](figures/football-tuned.png) 
 
-The sports footage (an international football match) proved considerably more challenging for the shot detectors. With the default settings, the recall for every tool is fairly poor, with PySceneDetect slightly outperforming the other tools.  With tuning, recall could be increased at the expense of precision.  This video was more challenging than the first for a couple of reasons. First, the detectors struggled with the fades between shots which are difficult to detect when statistics are computed between consecutive frames.  Second, much of the background was green (the football pitch) so that even when shots changed, the background was still dominated by a single color.
+The sports footage (an international football match) proved considerably more challenging for the shot detectors. With the default settings, the recall for every tool is fairly poor, with PySceneDetect slightly outperforming the other tools.  With tuning, recall could be increased at the expense of precision.  
+
+*NOTE: This video was more challenging than the first for a couple of reasons. First, the detectors struggled with the fades between shots which are difficult to detect when statistics are computed between consecutive frames.  Second, much of the background was green (the football pitch) so that even when shots changed, the background was still dominated by a single color.*
 
 ###Movie
 
 ![movie results](figures/movie.png) ![movie results - tuned](figures/movie-tuned.png) 
 
-The movie footage (a beach-based battle scene from Troy) was considerably easier than the sports but still more challenging than the TV gameshow. Overall, Shotdetect performed best on the movie footage. 
+The movie footage (a beach-based battle scene from Troy) was considerably easier than the sports but still more challenging than the TV gameshow. Overall, Shotdetect performed best on this video. 
 
 ##Speed
 
-For some applications, speed is important and it should be noted that there are significant differences in the speeds of each tool. These benchmarks should be considered **approximate** - they include minor additional costs (like parsing the output string for the results) but they give a reasonable indicator of the relative speed of each tool.
+There are significant differences in the speed of each tool. The following timing benchmarks should be considered **approximate** - they include minor additional costs (like parsing the output string for the results).  They give a reasonable indicator of the relative speed of each tool.  Note that the videos have the same frame rate (25 fps), but different resolutions (this affects the speed of the tools to different degrees).
 
 | Tool          | Gameshow clip        | Football clip | Gameshow clip |
 | ------------- | --------------------:| -------------:| -------------:|
