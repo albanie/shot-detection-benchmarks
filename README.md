@@ -42,11 +42,11 @@ The movie footage (a beach-based battle scene from Troy) was considerably easier
 
 There are significant differences in the speed of each tool. The following timing benchmarks should be considered **approximate** since they include minor time costs external to the tools (parsing the output string for the results).  Despite this, they give a reasonable indicator of the relative speed of each tool.  Note that the videos have the same frame rate (25 fps), but different resolutions (this affects the speed of the tools to different degrees).
 
-| Tool          | Gameshow clip        | Football clip | Gameshow clip |
+| Tool          | Gameshow clip        | Football clip |    Movie clip |
 | ------------- | --------------------:| -------------:| -------------:|
-| `ffprobe`       | 2.46s                 | 6.9s          | 4.21s         |
-| `Shotdetect`    | 21.3s                | 45.5          | 20.6s         |
-| `PySceneDetect` | 5min 27s             | 1min 57s      | 56.8s         |
+| `ffprobe`       | 2.46s                 | 6.9s       | 4.21s         |
+| `Shotdetect`    | 21.3s                | 45.5        | 20.6s         |
+| `PySceneDetect` | 5min 27s             | 1min 57s    | 56.8s         |
 
 **Details:**
 
